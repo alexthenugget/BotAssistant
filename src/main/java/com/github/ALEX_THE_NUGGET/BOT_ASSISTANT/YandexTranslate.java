@@ -1,4 +1,4 @@
-package org.example;
+package com.github.ALEX_THE_NUGGET.BOT_ASSISTANT;
 
 import okhttp3.*;
 import org.json.JSONArray;
@@ -10,7 +10,8 @@ import java.util.Collections;
 public class YandexTranslate {
     private static final String TRANSLATE_URL = "https://translate.api.cloud.yandex.net/translate/v2/translate";
 
-    private OkHttpClient client = new OkHttpClient();;
+    private OkHttpClient client = new OkHttpClient();
+    ;
     private String folderID = System.getenv("FOLDER_ID");
     private String IAMToken = System.getenv("IAM_TOKEN");
 
@@ -30,7 +31,6 @@ public class YandexTranslate {
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Bearer " + iamToken)
                 .build();
-        System.out.println(request);
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful() && response.body() != null) {
                 String responseBody = response.body().string();

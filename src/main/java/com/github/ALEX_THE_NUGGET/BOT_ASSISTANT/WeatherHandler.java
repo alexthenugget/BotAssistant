@@ -1,4 +1,4 @@
-package org.example;
+package com.github.ALEX_THE_NUGGET.BOT_ASSISTANT;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,20 +50,19 @@ public class WeatherHandler {
         }
     }
 
-    public String returnWeather(String cityName)throws IOException {
+    public String returnWeather(String cityName) throws IOException {
         String response = returnResponse(cityName);
         JSONObject jsonResponse = new JSONObject(response);
-        String temp = String.valueOf(jsonResponse.getJSONObject("main").getDouble("temp")- 273.15);
-        String feelsLike = String.valueOf(jsonResponse.getJSONObject("main").getDouble("feels_like")- 273.15);
-        String tempMin = String.valueOf(jsonResponse.getJSONObject("main").getDouble("temp_min")- 273.15);
-        String tempMax = String.valueOf(jsonResponse.getJSONObject("main").getDouble("temp_max")- 273.15);
+        String temp = String.valueOf(jsonResponse.getJSONObject("main").getDouble("temp") - 273.15);
+        String feelsLike = String.valueOf(jsonResponse.getJSONObject("main").getDouble("feels_like") - 273.15);
+        String tempMin = String.valueOf(jsonResponse.getJSONObject("main").getDouble("temp_min") - 273.15);
+        String tempMax = String.valueOf(jsonResponse.getJSONObject("main").getDouble("temp_max") - 273.15);
         String atmospherePressure = String.valueOf(jsonResponse.getJSONObject("main").getDouble("pressure"));
         String windSpeed = String.valueOf(jsonResponse.getJSONObject("wind").getDouble("speed"));
         JSONArray arrWeather = jsonResponse.getJSONArray("weather");
         String weather = "";
         String description = "";
-        for (int i = 0; i < arrWeather.length(); i++)
-        {
+        for (int i = 0; i < arrWeather.length(); i++) {
             weather = translateText.translate(arrWeather.getJSONObject(i).getString("main"), "ru");
             description = translateText.translate(arrWeather.getJSONObject(i).getString("description"), "ru");
 

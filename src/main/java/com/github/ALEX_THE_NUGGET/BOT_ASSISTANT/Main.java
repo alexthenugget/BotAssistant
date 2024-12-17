@@ -1,6 +1,5 @@
-package org.example;
+package com.github.ALEX_THE_NUGGET.BOT_ASSISTANT;
 
-import org.example.TelegramBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;

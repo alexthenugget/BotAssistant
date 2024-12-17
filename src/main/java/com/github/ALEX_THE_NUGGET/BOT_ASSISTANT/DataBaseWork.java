@@ -1,4 +1,5 @@
-package org.example;
+package com.github.ALEX_THE_NUGGET.BOT_ASSISTANT;
+
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.sql.*;
@@ -11,13 +12,13 @@ public class DataBaseWork {
              Statement stmt = conn.createStatement()) {
 
             String createTableSQL = """
-                CREATE TABLE IF NOT EXISTS users (
-                    User_Id TEXT NOT NULL,
-                    Date TEXT NOT NULL,
-                    Time TEXT NOT NULL,
-                    Task_Name TEXT NOT NULL
-                );
-            """;
+                        CREATE TABLE IF NOT EXISTS users (
+                            User_Id TEXT NOT NULL,
+                            Date TEXT NOT NULL,
+                            Time TEXT NOT NULL,
+                            Task_Name TEXT NOT NULL
+                        );
+                    """;
             stmt.execute(createTableSQL);
             message.setText("База данных успешно подключена");
         } catch (SQLException e) {
@@ -67,4 +68,4 @@ public class DataBaseWork {
             return "Ошибка получения данных: " + e.getMessage();
         }
     }
- }
+}

@@ -1,4 +1,4 @@
-package org.example;
+package com.github.ALEX_THE_NUGGET.BOT_ASSISTANT;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TelegramBot extends TelegramLongPollingBot{
+public class TelegramBot extends TelegramLongPollingBot {
     private HashMap<Long, String> chatStates = new HashMap<>();
     private DataBaseWork dataBase = new DataBaseWork();
     private WeatherHandler weatherHandler = new WeatherHandler();
@@ -43,33 +43,22 @@ public class TelegramBot extends TelegramLongPollingBot{
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
 
-            if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingNotification"))
-            {
+            if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingNotification")) {
                 chatStates.remove(chatId);
                 handleNotificationCommand(chatId, message, inputText);
-            }
-            else if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingTask"))
-            {
+            } else if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingTask")) {
                 chatStates.remove(chatId);
                 handleAddTaskCommand(chatId, message, inputText);
-            }
-            else if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingWeather"))
-            {
+            } else if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingWeather")) {
                 chatStates.remove(chatId);
                 handleWeatherCommand(message);
-            }
-            else if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingText"))
-            {
+            } else if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingText")) {
                 chatStates.remove(chatId);
                 handleTranslationCommand(message, inputText);
-            }
-            else if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingCity"))
-            {
+            } else if (chatStates.containsKey(chatId) && chatStates.get(chatId).equals("awaitingCity")) {
                 chatStates.remove(chatId);
                 handleCityCommand(message, inputText);
-            }
-            else
-            {
+            } else {
                 processCommand(inputText, message, update);
             }
         }
@@ -126,8 +115,7 @@ public class TelegramBot extends TelegramLongPollingBot{
                 });
                 commandHandler.run();
             }
-        }
-        else {
+        } else {
             handleTextMessage(message);
             executeMessage(message);
         }
@@ -196,14 +184,12 @@ public class TelegramBot extends TelegramLongPollingBot{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy");
             String formattedDate = now.format(formatter);
             message.setText(dataBase.getDataByDate(Id, formattedDate, message));
-        }
-        else {
+        } else {
             message.setText("Сначала установите город при помощи /setcity.");
         }
     }
 
-    private void handleNotificationCommand(long Id, SendMessage message, String time)
-    {
+    private void handleNotificationCommand(long Id, SendMessage message, String time) {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         timeFormat.setLenient(false);
         try {
@@ -220,8 +206,7 @@ public class TelegramBot extends TelegramLongPollingBot{
                 weather = weatherHandler.returnWeather(usersCity);
                 message.setText("Успешно. Уведомление будет отправлено в назначенное вами время");
                 executeMessage(message);
-            }
-            else {
+            } else {
                 message.setText("Сначала установите город при помощи /setcity.");
                 executeMessage(message);
                 return;
@@ -237,8 +222,7 @@ public class TelegramBot extends TelegramLongPollingBot{
         scheduleDailyNotification(usersTimeZone, time, weather, plan, message);
     }
 
-    private void handleAddTaskCommand(long Id, SendMessage message, String task)
-    {
+    private void handleAddTaskCommand(long Id, SendMessage message, String task) {
         if (usersCity == null || usersCity.isEmpty()) {
             message.setText("Сначала установите город при помощи /setcity.");
             executeMessage(message);
@@ -280,15 +264,13 @@ public class TelegramBot extends TelegramLongPollingBot{
         executeMessage(message);
     }
 
-    private void handleWeatherCommand(SendMessage message)
-    {
+    private void handleWeatherCommand(SendMessage message) {
         String weather = null;
         try {
             if (usersCity != null && !usersCity.isEmpty()) {
                 weather = weatherHandler.returnWeather(usersCity);
                 message.setText(weather);
-            }
-            else {
+            } else {
                 message.setText("Сначала установите город при помощи /setcity.");
             }
         } catch (IOException e) {
