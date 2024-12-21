@@ -22,7 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class TelegramBot extends TelegramLongPollingBot {
-    HashMap<String, Runnable> commandHandlers = new HashMap<>();
+    private HashMap<String, Runnable> commandHandlers = new HashMap<>();
     private HashMap<Long, String> chatStates = new HashMap<>();
     private DataBaseWork dataBase = new DataBaseWork();
     private WeatherHandler weatherHandler = new WeatherHandler();
