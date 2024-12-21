@@ -1,4 +1,4 @@
-package com.github.ALEX_THE_NUGGET.BOT_ASSISTANT;
+package com.github.ALEX_THE_NUGGET.bot_assistant.telegram;
 
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;

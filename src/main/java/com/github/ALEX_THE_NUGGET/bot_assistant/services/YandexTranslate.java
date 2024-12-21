@@ -1,4 +1,4 @@
-package com.github.ALEX_THE_NUGGET.BOT_ASSISTANT;
+package com.github.ALEX_THE_NUGGET.bot_assistant.services;
 
 import okhttp3.*;
 import org.json.JSONArray;

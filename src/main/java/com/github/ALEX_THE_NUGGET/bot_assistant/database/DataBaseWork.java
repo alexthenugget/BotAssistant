@@ -1,4 +1,4 @@
-package com.github.ALEX_THE_NUGGET.BOT_ASSISTANT;
+package com.github.ALEX_THE_NUGGET.bot_assistant.database;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
